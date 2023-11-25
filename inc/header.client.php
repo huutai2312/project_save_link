@@ -64,6 +64,42 @@ if (isset($_GET['deleteWebsiteid'])) {
 </head>
 
 <body>
+
+    <script>
+        // Thêm sự kiện nhấp vào liên kết
+        document.addEventListener('DOMContentLoaded', function() {
+            var websiteLinks = document.querySelectorAll('.nav-link');
+
+            websiteLinks.forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault(); // Ngăn chặn chuyển hướng trang khi nhấp vào liên kết
+
+                    // Lấy đường link từ thuộc tính href của liên kết
+                    var websiteLink = link.getAttribute('href');
+
+                    // Hiển thị iframe và ẩn các form
+                    document.getElementById('websiteFrame').src = websiteLink;
+                    hideForms();
+                });
+            });
+        });
+
+
+        // Hàm để ẩn các form và hiển thị iframe
+        function hideForms() {
+            var formsToHide = document.querySelectorAll('.page-content .four-form');
+            var iframeToDisplay = document.getElementById('websiteFrame');
+
+            formsToHide.forEach(function(form) {
+                form.style.display = 'none';
+            });
+
+            iframeToDisplay.style.display = 'block';
+        }
+        
+        
+    </script>
+
     <div class="main-wrapper">
         <!-- ==========SIDEBAR========== -->
         <nav class="sidebar">
@@ -143,48 +179,7 @@ if (isset($_GET['deleteWebsiteid'])) {
                                 Session::destroy();
                             }
                             ?>
-                            <a class="dropdown-item" href="?action=logout">
-                                <i class="dripicons-exit text-muted mr-2"></i> Logout </a>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i data-feather="file" style="outline: none;"></i>
-                            </a>
-                            <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown" style="outline: none;">
-                                <div class="p-1">
-                                    <div class="dropdown-item d-flex align-items-center py-2">
-                                        <div class="flex-grow-1 me-2" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
-                                            <a>Add category</a>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-item d-flex align-items-center py-2">
-                                        <div class="flex-grow-1 me-2" data-bs-toggle="modal" data-bs-target="#listCategoryModal">
-                                            <a>List category</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i data-feather="edit" style="outline: none;"></i>
-                            </a>
-                            <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown" style="outline: none;">
-                                <div class="p-1">
-                                    <div class="dropdown-item d-flex align-items-center py-2">
-                                        <div class="flex-grow-1 me-2" data-bs-toggle="modal" data-bs-target="#addWebsiteModal">
-                                            <a>Add website</a>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-item d-flex align-items-center py-2">
-                                        <div class="flex-grow-1 me-2" data-bs-toggle="modal" data-bs-target="#listWebsiteModal">
-                                            <a>List website</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <a class="btn btn-inverse-danger" href="?action=logout">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -193,6 +188,3 @@ if (isset($_GET['deleteWebsiteid'])) {
 
 
             <!-- ==========TOPBAR========== -->
-
-
-            <div class="page-content">
