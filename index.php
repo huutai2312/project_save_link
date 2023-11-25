@@ -33,9 +33,7 @@ if (isset($_GET['deleteWebsiteid'])) {
     <div class="col-md-6 grid-margin stretch-card" bis_skin_checked="1">
         <div class="card" bis_skin_checked="1">
             <div class="card-body" bis_skin_checked="1">
-
                 <h6 class="card-title">ADD CATEGORY</h6>
-
                 <?php
                 if (isset($insertTp)) {
                     echo $insertTp;
