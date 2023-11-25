@@ -76,8 +76,8 @@ class website
         $result = $this->db->select($query);
         return $result;
     }
-    
-    
+
+
     public function show_website()
     {
         $query = "SELECT * FROM website ORDER BY id DESC";
@@ -87,9 +87,13 @@ class website
 
     public function del_website($id)
     {
-        $query = "DELETE FROM website where id = '$id'";
-        $result = $this->db->delete($query);
-        return $result;
+        $id = mysqli_real_escape_string($this->db->link, $id);
+
+        // Thay vì xóa dữ liệu, cập nhật trạng thái sang 'Hide'
+        $query = "UPDATE website SET status = 'Hide' WHERE id = '$id'";
+
+        $result = $this->db->update($query);
+
         if ($result) {
             $alert = "<p>Done.</p>";
             return $alert;
@@ -97,6 +101,16 @@ class website
             $alert = "<p>Error.</p>";
             return $alert;
         }
+        // $query = "DELETE FROM website where id = '$id'";
+        // $result = $this->db->delete($query);
+        // return $result;
+        // if ($result) {
+        //     $alert = "<p>Done.</p>";
+        //     return $alert;
+        // } else {
+        //     $alert = "<p>Error.</p>";
+        //     return $alert;
+        // }
     }
 
     public function getwebbyId($id)

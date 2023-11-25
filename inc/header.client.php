@@ -96,8 +96,6 @@ if (isset($_GET['deleteWebsiteid'])) {
 
             iframeToDisplay.style.display = 'block';
         }
-        
-        
     </script>
 
     <div class="main-wrapper">
